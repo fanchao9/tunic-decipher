@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <rect width="1920" height="1080" fill="#d8e0cd"/>
+  <rect x="70" y="60" width="1780" height="960" fill="#eef1dc" stroke="#46513d" stroke-width="8"/>
+  <text x="130" y="155" fill="#1e2b22" font-family="Georgia, serif" font-size="64" font-weight="700">Manual Spread Placeholder</text>
+  <text x="130" y="225" fill="#586549" font-family="Georgia, serif" font-size="38">Page 2 - annotations can sit on top of this image</text>
+  <rect x="170" y="320" width="620" height="420" fill="#f7efd2" stroke="#46513d" stroke-width="8"/>
+  <g stroke="#1e2b22" stroke-width="10">
+    <path d="M260 420h430M260 510h430M260 600h300"/>
+  </g>
+  <g fill="none" stroke="#7b8d5a" stroke-width="14" stroke-linejoin="round">
+    <path d="M1130 350l270 120-110 260-285-60z"/>
+    <path d="M1210 420l110 65-55 135-120-40z"/>
+  </g>
+  <text x="1070" y="820" fill="#46513d" font-family="Georgia, serif" font-size="42">Use arrows to flip spreads</text>
+</svg>

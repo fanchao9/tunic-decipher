@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <rect width="1920" height="1080" fill="#eadfbd"/>
+  <rect x="70" y="60" width="1780" height="960" fill="#f4e9ca" stroke="#5b4932" stroke-width="8"/>
+  <text x="130" y="155" fill="#2b241b" font-family="Georgia, serif" font-size="64" font-weight="700">Tunic Manual Placeholder</text>
+  <text x="130" y="225" fill="#6f5a3a" font-family="Georgia, serif" font-size="38">Page 1 - import real manual art from Supabase later</text>
+  <g fill="none" stroke="#2d4638" stroke-width="12" stroke-linecap="round">
+    <path d="M220 380h220l-110 170z"/>
+    <path d="M560 360v220m0-220l145 110-145 110"/>
+    <path d="M850 360l130 220m0-220l-130 220m-65-110h260"/>
+  </g>
+  <g fill="#7d6b4b" font-family="Georgia, serif" font-size="34">
+    <text x="180" y="720">Ancient note line one</text>
+    <text x="180" y="780">Ancient note line two</text>
+    <text x="180" y="840">Ancient note line three</text>
+  </g>
+  <circle cx="1510" cy="520" r="175" fill="#c99e4b" opacity="0.35" stroke="#5b4932" stroke-width="10"/>
+  <path d="M1390 520h240M1510 400v240" stroke="#5b4932" stroke-width="12"/>
+</svg>

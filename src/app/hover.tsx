@@ -1,13 +1,14 @@
 'use client';
 
 import { useState } from 'react';
+import { Translation } from '../types';
 
 interface TranslationBoxProps {
-  translation: any;
-  onUpdate: (fields: any) => void;
+  translation: Translation & { isEditing?: boolean };
+  onUpdate: (fields: Partial<Translation> & { isEditing?: boolean }) => void;
 }
 
-function TranslationBox({ translation, onUpdate }: TranslationBoxProps) {
+export default function TranslationBox({ translation, onUpdate }: TranslationBoxProps) {
   const [showEnglish, setShowEnglish] = useState(false);
 
   if (translation.isEditing) {

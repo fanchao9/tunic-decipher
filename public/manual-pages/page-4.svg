@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <rect width="1920" height="1080" fill="#e1d5d0"/>
+  <rect x="70" y="60" width="1780" height="960" fill="#f2e9df" stroke="#563f3b" stroke-width="8"/>
+  <text x="130" y="155" fill="#2f2220" font-family="Georgia, serif" font-size="64" font-weight="700">Translation Workspace</text>
+  <text x="130" y="225" fill="#6d5450" font-family="Georgia, serif" font-size="38">Page 4 - drag saved notes while editing is unlocked</text>
+  <g fill="none" stroke="#563f3b" stroke-width="10">
+    <path d="M220 345h620v520H220z"/>
+    <path d="M275 430h510M275 520h420M275 610h475M275 700h360"/>
+  </g>
+  <g fill="#b84f3f" opacity="0.55">
+    <circle cx="1240" cy="450" r="70"/>
+    <circle cx="1420" cy="565" r="95"/>
+    <circle cx="1230" cy="715" r="120"/>
+  </g>
+  <path d="M1130 830c130-155 255-175 440-35" fill="none" stroke="#563f3b" stroke-width="14" stroke-linecap="round"/>
+</svg>

@@ -4,5 +4,11 @@ export interface Translation {
   y: number;
   tunicText: string;
   englishText: string;
-  isEditing: boolean;
+}
+
+export interface ManualPage {
+  id: string;
+  pageNumber: number;
+  imageUrl: string;
+  title: string;
 }

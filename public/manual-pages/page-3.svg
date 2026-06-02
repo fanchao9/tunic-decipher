@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <rect width="1920" height="1080" fill="#cdd8dd"/>
+  <rect x="70" y="60" width="1780" height="960" fill="#ecf0ea" stroke="#374751" stroke-width="8"/>
+  <text x="130" y="155" fill="#1f2f36" font-family="Georgia, serif" font-size="64" font-weight="700">Runic Notes Placeholder</text>
+  <text x="130" y="225" fill="#52646f" font-family="Georgia, serif" font-size="38">Page 3 - replace with 1920x1080 manual screenshot</text>
+  <g fill="none" stroke="#234653" stroke-width="12">
+    <path d="M230 400h360v360H230z"/>
+    <path d="M230 520h360M350 400v360M470 400v360"/>
+  </g>
+  <g fill="#234653" font-family="Georgia, serif" font-size="78">
+    <text x="840" y="465">𐌰 𐌱 𐌲</text>
+    <text x="840" y="575">𐌳 𐌴 𐌵</text>
+    <text x="840" y="685">𐌶 𐌷 𐌹</text>
+  </g>
+  <path d="M1430 335c170 80 220 250 130 390-140 105-320 50-385-80 85-45 180-140 255-310z" fill="#e1b64f" opacity="0.45" stroke="#374751" stroke-width="10"/>
+</svg>
