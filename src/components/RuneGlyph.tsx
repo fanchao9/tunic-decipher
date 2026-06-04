@@ -52,8 +52,8 @@ const segmentLines: Partial<Record<RuneSegment, [number, number, number, number]
   'outer-bottom-middle-right': [100, 98, 100, 125],
   'outer-bottom-left': [20, 125, 60, 159],
   'outer-bottom-right': [100, 125, 60, 159],
-  'inner-top-left': [60, 82, 20, 55],
-  'inner-top-right': [60, 82, 100, 55],
+  'inner-top-left': [60, 66, 20, 50],
+  'inner-top-right': [60, 66, 100, 50],
   'inner-bottom-left': [60, 98, 20, 125],
   'inner-bottom-right': [60, 98, 100, 125],
   'stem-top': [60, 82, 60, 21],
@@ -63,13 +63,40 @@ const segmentLines: Partial<Record<RuneSegment, [number, number, number, number]
 };
 
 export const placeholderRuneMap: Record<string, RuneSegment[]> = {
+  //vowels
   uh: ['outer-top-left', 'outer-top-right'],
-  ee: ['outer-top-middle-left', 'outer-top-left', 'outer-bottom-middle-left', 'outer-bottom-left', 'outer-bottom-right'],
-  B: ['outer-top-right', 'outer-top-middle-right', 'inner-top-left', 'stem-bottom'],
-  C: ['outer-top-left', 'outer-bottom-left', 'inner-bottom-right'],
-  D: ['outer-top-right', 'outer-bottom-right', 'inner-bottom-left'],
-  E: ['stem-top', 'stem-bottom', 'base-top-left'],
-  F: ['inner-top-left', 'inner-top-right'],
+  ee: ['outer-top-left', 'outer-top-middle-left', 'outer-bottom-middle-left', 'outer-bottom-left', 'outer-bottom-right'],
+  oh: ['outer-top-left', 'outer-top-right', 'outer-top-middle-left', 'outer-bottom-middle-left', 'outer-bottom-left', 'outer-bottom-right'],
+  uu: ['outer-top-left', 'outer-top-right', 'outer-bottom-middle-left','outer-bottom-middle-left', 'outer-bottom-left'],
+  ih: ['outer-bottom-left', 'outer-bottom-right'],
+  eh: ['outer-top-middle-left', 'outer-bottom-middle-left', 'outer-bottom-left', 'outer-bottom-right'],
+  ar: ['outer-top-left', 'outer-top-right', 'outer-bottom-left', 'outer-bottom-right'],
+  eye: ['outer-top-right'],
+  ay: ['outer-top-left'],
+  er: ['outer-top-right', 'outer-top-middle-left', 'outer-bottom-middle-left', 'outer-bottom-left', 'outer-bottom-right'],
+  
+  //consonants
+  b: ['stem-top', 'inner-bottom-right'],
+  d: ['stem-top', 'inner-bottom-left', 'inner-bottom-right'],
+  f: ['stem-top', 'inner-top-right', 'inner-bottom-left'],
+  g: ['stem-top', 'inner-top-right', 'inner-bottom-right'],
+  h: ['stem-top', 'stem-bottom', 'inner-bottom-right'],
+  j: ['stem-top', 'inner-bottom-left'],
+  k: ['stem-top', 'inner-top-right', 'inner-bottom-right'],
+  l: ['stem-top', 'stem-bottom'],
+  m: ['inner-bottom-left', 'inner-bottom-right'],
+  n: ['inner-top-left', 'inner-bottom-left', 'inner-bottom-right'],
+  p: ['stem-top', 'stem-bottom', 'inner-top-right'],
+  r: ['stem-top', 'stem-bottom', 'inner-top-right'],
+  s: ['stem-top', 'stem-bottom', 'inner-top-right', 'inner-bottom-left'],
+  t: ['stem-top', 'stem-bottom', 'inner-top-left', 'inner-top-right'],
+  v: ['stem-top', 'inner-top-left', 'inner-bottom-right'],
+  w: ['inner-top-left', 'inner-top-right'],
+  y: ['stem-top', 'stem-bottom', 'inner-top-left'],
+  z: ['stem-top', 'stem-bottom', 'inner-top-left', 'inner-bottom-right'],
+  sh: ['stem-top', 'stem-bottom', 'inner-top-left', 'inner-top-right', 'inner-bottom-left', 'inner-bottom-right'],
+  th: ['stem-top', 'stem-bottom', 'inner-bottom-left', 'inner-bottom-right'],
+
 };
 
 export default function RuneGlyph({

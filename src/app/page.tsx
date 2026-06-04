@@ -8,7 +8,7 @@ import RuneGlyph, { placeholderRuneMap, RuneSegment } from '../components/RuneGl
 import { ManualPage } from '../types';
 import { manualPages } from '../lib/manualPages';
 
-const placeholderAlphabet = ['uh', 'ee', 'oh', 'uu', 'ih', 'eh', 'ar', 'eye', 'ay', 'b', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p'];
+const placeholderAlphabet = ['uh', 'ee', 'oh', 'uu', 'ih', 'eh', 'ar', 'eye', 'ay', 'b', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'r', 's', 't', 'v', 'w', 'y', 'z', 'sh', 'th', 'test'];
 
 const placeholderLetterSegments: RuneSegment[] = [
   'outer-top-left',
