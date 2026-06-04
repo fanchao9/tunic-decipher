@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import ManualPageEditor from '../components/ManualPageEditor';
+import ManualPageToc from '../components/ManualPageToc';
 import RuneGlyph, { placeholderRuneMap, RuneSegment } from '../components/RuneGlyph';
 import { ManualPage } from '../types';
 import { manualPages } from '../lib/manualPages';
@@ -94,7 +95,7 @@ export default function Home() {
   const [isTocOpen, setIsTocOpen] = useState(false);
   const [englishInput, setEnglishInput] = useState('The golden path');
   const [collectedPageIds, setCollectedPageIds] = useState<Record<string, boolean>>(
-    () => Object.fromEntries(manualPages.map((page) => [page.id, true]))
+    () => Object.fromEntries(manualPages.map((page) => [page.id, false]))
   );
 
   const pageSpreads = useMemo(() => buildAllManualSpreads(manualPages), []);
@@ -135,7 +136,7 @@ export default function Home() {
       if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.getAttribute('contenteditable') === 'true')) {
         return;
       }
-
+      // Use 'A' and 'D' keys to paginate left and right through spreads
       const key = event.key.toLowerCase();
       if (key === 'a') {
         event.preventDefault();
@@ -222,78 +223,15 @@ export default function Home() {
                 Table of Contents
               </button>
 
-            {isTocOpen && (
-              <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/90 p-4">
-                <div className="w-full max-w-6xl overflow-hidden rounded-3xl border border-slate-700 bg-slate-900 shadow-2xl">
-                  <div className="border-b border-slate-700 p-4">
-                    <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-                      <div>
-                        <h2 className="text-xl font-bold text-yellow-300">Table of Contents</h2>
-                        <p className="mt-1 text-sm text-slate-300">Toggle paired spreads like 1/52, 2/3, and so on. The TOC is split into 3 columns with 9/9/8 spread entries.</p>
-                      </div>
-                      <div className="flex flex-wrap items-center gap-2">
-                        <button
-                          type="button"
-                          onClick={selectAllPages}
-                          className="rounded bg-slate-800 px-3 py-2 text-sm font-semibold text-slate-100 transition hover:bg-slate-700"
-                        >
-                          Select All
-                        </button>
-                        <button
-                          type="button"
-                          onClick={clearAllPages}
-                          className="rounded bg-slate-800 px-3 py-2 text-sm font-semibold text-slate-100 transition hover:bg-slate-700"
-                        >
-                          Clear All
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => setIsTocOpen(false)}
-                          className="rounded bg-yellow-400 px-3 py-2 text-sm font-semibold text-slate-950 transition hover:bg-yellow-300"
-                        >
-                          Close
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="grid gap-3 p-4 md:grid-cols-3">
-                    {spreadColumns.map((column, columnIndex) => (
-                      <div key={columnIndex} className="space-y-2">
-                        {column.map((spread) => {
-                          const isSelected = spread.every((page) => collectedPageIds[page.id]);
-                          const label = spread.map((page) => page.pageNumber).join('/');
-
-                          return (
-                            <button
-                              key={label}
-                              type="button"
-                              onClick={() => toggleSpreadSelection(spread)}
-                              aria-pressed={isSelected}
-                              className={`w-full rounded border px-3 py-2 text-left text-sm transition focus:outline-none focus:ring-2 focus:ring-yellow-300 ${
-                                isSelected
-                                  ? 'border-yellow-300 bg-yellow-400 text-slate-950 shadow'
-                                  : 'border-slate-700 bg-slate-800 text-slate-200 hover:bg-slate-700'
-                              }`}
-                            >
-                              Page {label}
-                            </button>
-                          );
-                        })}
-                      </div>
-                    ))}
-                  </div>
-                  <div className="flex justify-end border-t border-slate-700 p-4">
-                    <button
-                      type="button"
-                      onClick={() => setIsTocOpen(false)}
-                      className="rounded bg-yellow-400 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-yellow-300"
-                    >
-                      Done
-                    </button>
-                  </div>
-                </div>
-              </div>
-            )}
+            <ManualPageToc
+              isOpen={isTocOpen}
+              tocSpreads={tocSpreads}
+              collectedPageIds={collectedPageIds}
+              onToggleSpread={toggleSpreadSelection}
+              onSelectAll={selectAllPages}
+              onClearAll={clearAllPages}
+              onClose={() => setIsTocOpen(false)}
+            />
 
             <div className="grid w-full gap-0 lg:grid-cols-2">
               {visiblePages.map((page) => (
