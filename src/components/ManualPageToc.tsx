@@ -32,9 +32,6 @@ export default function ManualPageToc({
           <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             <div>
               <h2 className="text-xl font-bold text-yellow-300">Table of Contents</h2>
-              <p className="mt-1 text-sm text-slate-300">
-                Toggle paired spreads like 1/52, 2/3, and so on. The TOC is split into 3 columns with 9/9/8 spread entries.
-              </p>
             </div>
             <div className="flex flex-wrap items-center gap-2">
               <button
@@ -86,15 +83,6 @@ export default function ManualPageToc({
               })}
             </div>
           ))}
-        </div>
-        <div className="flex justify-end border-t border-slate-700 p-4">
-          <button
-            type="button"
-            onClick={onClose}
-            className="rounded bg-yellow-400 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-yellow-300"
-          >
-            Done
-          </button>
         </div>
       </div>
     </div>

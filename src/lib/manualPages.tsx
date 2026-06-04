@@ -21,28 +21,28 @@ export const manualPages: ManualPage[] = [
   {
     id: 'manual-2',
     pageNumber: 2,
-    imageUrl: '/manual-pages/placeholder.png',
+    imageUrl: '/manual-pages/manual-2.png',
     title: 'Manual Page 2',
     translations: [{ id: 'p2-placeholder-1', x: 50, y: 35, englishText: 'Page two text', maxWidth: 22 }],
   },
   {
     id: 'manual-3',
     pageNumber: 3,
-    imageUrl: '/manual-pages/placeholder.png',
+    imageUrl: '/manual-pages/manual-3.png',
     title: 'Manual Page 3',
     translations: [{ id: 'p3-placeholder-1', x: 56, y: 48, englishText: 'Hardcode each box here', maxWidth: 26 }],
   },
   {
     id: 'manual-4',
     pageNumber: 4,
-    imageUrl: '/manual-pages/placeholder.png',
+    imageUrl: '/manual-pages/manual-4.png',
     title: 'Manual Page 4',
     translations: [{ id: 'p4-placeholder-1', x: 48, y: 60, englishText: 'Manual translation', maxWidth: 24 }],
   },
   {
     id: 'manual-5',
     pageNumber: 5,
-    imageUrl: '/manual-pages/placeholder.png',
+    imageUrl: '/manual-pages/manual-5.png',
     title: 'Manual Page 5',
   },
   {
@@ -60,13 +60,13 @@ export const manualPages: ManualPage[] = [
   {
     id: 'manual-8',
     pageNumber: 8,
-    imageUrl: '/manual-pages/placeholder.png',
+    imageUrl: '/manual-pages/manual-8.png',
     title: 'Manual Page 8',
   },
   {
     id: 'manual-9',
     pageNumber: 9,
-    imageUrl: '/manual-pages/placeholder.png',
+    imageUrl: '/manual-pages/manual-9.png',
     title: 'Manual Page 9',
   },
   {
@@ -168,13 +168,13 @@ export const manualPages: ManualPage[] = [
   {
     id: 'manual-26',
     pageNumber: 26,
-    imageUrl: '/manual-pages/placeholder.png',
+    imageUrl: '/manual-pages/manual-26.png',
     title: 'Manual Page 26',
   },
   {
     id: 'manual-27',
     pageNumber: 27,
-    imageUrl: '/manual-pages/placeholder.png',
+    imageUrl: '/manual-pages/manual-27.png',
     title: 'Manual Page 27',
   },
   {
@@ -204,13 +204,13 @@ export const manualPages: ManualPage[] = [
   {
     id: 'manual-32',
     pageNumber: 32,
-    imageUrl: '/manual-pages/placeholder.png',
+    imageUrl: '/manual-pages/manual-32.png',
     title: 'Manual Page 32',
   },
   {
     id: 'manual-33',
     pageNumber: 33,
-    imageUrl: '/manual-pages/placeholder.png',
+    imageUrl: '/manual-pages/manual-33.png',
     title: 'Manual Page 33',
   },
   {
@@ -264,49 +264,49 @@ export const manualPages: ManualPage[] = [
   {
     id: 'manual-42',
     pageNumber: 42,
-    imageUrl: '/manual-pages/placeholder.png',
+    imageUrl: '/manual-pages/manual-42.png',
     title: 'Manual Page 42',
   },
   {
     id: 'manual-43',
     pageNumber: 43,
-    imageUrl: '/manual-pages/placeholder.png',
+    imageUrl: '/manual-pages/manual-43.png',
     title: 'Manual Page 43',
   },
   {
     id: 'manual-44',
     pageNumber: 44,
-    imageUrl: '/manual-pages/placeholder.png',
+    imageUrl: '/manual-pages/manual-44.png',
     title: 'Manual Page 44',
   },
   {
     id: 'manual-45',
     pageNumber: 45,
-    imageUrl: '/manual-pages/placeholder.png',
+    imageUrl: '/manual-pages/manual-45.png',
     title: 'Manual Page 45',
   },
   {
     id: 'manual-46',
     pageNumber: 46,
-    imageUrl: '/manual-pages/placeholder.png',
+    imageUrl: '/manual-pages/manual-46.png',
     title: 'Manual Page 46',
   },
   {
     id: 'manual-47',
     pageNumber: 47,
-    imageUrl: '/manual-pages/placeholder.png',
+    imageUrl: '/manual-pages/manual-47.png',
     title: 'Manual Page 47',
   },
   {
     id: 'manual-48',
     pageNumber: 48,
-    imageUrl: '/manual-pages/placeholder.png',
+    imageUrl: '/manual-pages/manual-48.png',
     title: 'Manual Page 48',
   },
   {
     id: 'manual-49',
     pageNumber: 49,
-    imageUrl: '/manual-pages/placeholder.png',
+    imageUrl: '/manual-pages/manual-49.png',
     title: 'Manual Page 49',
   },
   {
