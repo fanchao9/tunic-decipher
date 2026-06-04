@@ -1,6 +1,5 @@
-export async function POST(request: Request) {
-  const { password } = await request.json();
-  const expectedPassword = process.env.MANUAL_ADMIN_PASSWORD || 'tunic';
+import { NextResponse } from 'next/server';
 
-  return Response.json({ ok: password === expectedPassword });
+export async function POST() {
+  return NextResponse.json({ ok: false, message: 'Manual auth is disabled.' }, { status: 410 });
 }
