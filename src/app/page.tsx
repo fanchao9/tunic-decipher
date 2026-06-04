@@ -194,12 +194,12 @@ export default function Home() {
         </header>
 
         {activeTab === 'alphabet' && (
-          <section className="grid gap-4 px-4 md:grid-cols-[260px_1fr] md:px-6">
-            <div className="rounded border border-slate-700 bg-slate-900 p-4 h-fit">
-              <h2 className="text-xl font-bold text-yellow-300">Alphabet</h2>
-              <p className="mt-2 text-sm text-slate-300">Placeholder segment maps until the full rune alphabet is filled in.</p>
-            </div>
+          <section className="grid gap-4 px-4 md:px-6">
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+              <div className="rounded border border-slate-700 bg-slate-900 p-4 text-center">
+                <h2 className="text-xl font-bold text-yellow-300">Alphabet</h2>
+                <p className="mt-2 text-sm text-slate-300">Each rune depicts a syllabic sound in the Tunic language.</p>
+              </div>
               {placeholderAlphabet.map((letter) => (
                 <div key={letter} className="rounded border border-slate-700 bg-slate-800 p-4 text-center">
                   <div className="text-m font-bold text-slate-400">{letter}</div>
