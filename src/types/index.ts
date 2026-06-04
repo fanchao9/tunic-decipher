@@ -2,8 +2,9 @@ export interface Translation {
   id: string;
   x: number;
   y: number;
-  tunicText: string;
   englishText: string;
+  maxWidth?: number;
+  fontSize?: number;
 }
 
 export interface ManualPage {
@@ -11,4 +12,5 @@ export interface ManualPage {
   pageNumber: number;
   imageUrl: string;
   title: string;
+  translations?: Translation[];
 }
