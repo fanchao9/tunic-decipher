@@ -15,8 +15,6 @@ export type RuneSegment =
   | 'stem-bottom'
   | 'base-top-left'
   | 'base-top-right'
-  | 'base-bottom-left'
-  | 'base-bottom-right'
   | 'circle-bottom';
 
 interface RuneGlyphProps {
@@ -62,17 +60,16 @@ const segmentLines: Partial<Record<RuneSegment, [number, number, number, number]
   'stem-bottom': [60, 98, 60, 159],
   'base-top-left': [20, 82, 60, 82],
   'base-top-right': [60, 82, 100, 82],
-  'base-bottom-left': [20, 98, 60, 98],
-  'base-bottom-right': [60, 98, 100, 98],
 };
 
 export const placeholderRuneMap: Record<string, RuneSegment[]> = {
-  A: ['outer-top-left', 'outer-top-right', 'stem-top', 'base-top-left', 'base-top-right'],
+  uh: ['outer-top-left', 'outer-top-right'],
+  ee: ['outer-top-middle-left', 'outer-top-left', 'outer-bottom-middle-left', 'outer-bottom-left', 'outer-bottom-right'],
   B: ['outer-top-right', 'outer-top-middle-right', 'inner-top-left', 'stem-bottom'],
-  C: ['outer-top-left', 'outer-bottom-left', 'inner-bottom-right', 'base-top-left'],
-  D: ['outer-top-right', 'outer-bottom-right', 'inner-bottom-left', 'base-top-right'],
-  E: ['stem-top', 'stem-bottom', 'base-top-left', 'base-top-right'],
-  F: ['inner-top-left', 'inner-top-right', 'base-bottom-left', 'base-bottom-right'],
+  C: ['outer-top-left', 'outer-bottom-left', 'inner-bottom-right'],
+  D: ['outer-top-right', 'outer-bottom-right', 'inner-bottom-left'],
+  E: ['stem-top', 'stem-bottom', 'base-top-left'],
+  F: ['inner-top-left', 'inner-top-right'],
 };
 
 export default function RuneGlyph({
@@ -81,7 +78,11 @@ export default function RuneGlyph({
   stroke = '#fde68a',
   title = 'Tunic rune',
 }: RuneGlyphProps) {
-  const visibleSegments = new Set(segments);
+  const visibleSegments = new Set([
+    ...segments,
+    'base-top-left',
+    'base-top-right',
+  ] as RuneSegment[]);
 
   return (
     <svg
