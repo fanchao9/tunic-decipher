@@ -321,4 +321,9 @@ export const manualPages: ManualPage[] = [
     imageUrl: '/manual-pages/manual-51.png',
     title: 'Manual Page 51',
   },
+  {id: 'manual-52',
+    pageNumber: 52,
+    imageUrl: '/manual-pages/manual-52.png',
+    title: 'Manual Page 52',
+  },
 ];
