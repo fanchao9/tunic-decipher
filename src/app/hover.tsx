@@ -1,57 +1,24 @@
 'use client';
 
-import { useState } from 'react';
 import { Translation } from '../types';
 
 interface TranslationBoxProps {
-  translation: Translation & { isEditing?: boolean };
-  onUpdate: (fields: Partial<Translation> & { isEditing?: boolean }) => void;
+  translation: Translation;
 }
 
-export default function TranslationBox({ translation, onUpdate }: TranslationBoxProps) {
-  const [showEnglish, setShowEnglish] = useState(false);
-
-  if (translation.isEditing) {
-    return (
-      <div 
-        className="absolute bg-white/90 p-2 rounded shadow-lg border border-slate-400 z-10 w-48"
-        style={{ left: `${translation.x}%`, top: `${translation.y}%`, transform: 'translate(-50%, -50%)' }}
-      >
-        <input
-          type="text"
-          placeholder="Tunic Text..."
-          className="w-full mb-2 p-1 border rounded text-sm text-black"
-          value={translation.tunicText}
-          onChange={(e) => onUpdate({ tunicText: e.target.value })}
-        />
-        <input
-          type="text"
-          placeholder="English Translation..."
-          className="w-full mb-2 p-1 border rounded text-sm text-black"
-          value={translation.englishText}
-          onChange={(e) => onUpdate({ englishText: e.target.value })}
-        />
-        <button 
-          onClick={() => onUpdate({ isEditing: false })}
-          className="bg-green-600 text-white text-xs px-2 py-1 rounded w-full"
-        >
-          Save
-        </button>
-      </div>
-    );
-  }
-
+export default function TranslationBox({ translation }: TranslationBoxProps) {
   return (
     <div
-      className="absolute bg-yellow-100/80 p-2 rounded shadow cursor-pointer text-center min-w-[100px] hover:bg-yellow-200 transition-colors z-0 hover:z-10"
-      style={{ left: `${translation.x}%`, top: `${translation.y}%`, transform: 'translate(-50%, -50%)' }}
-      onClick={() => setShowEnglish(!showEnglish)}
-      onDoubleClick={() => onUpdate({ isEditing: true })}
+      className="absolute z-10 rounded border border-yellow-200/70 bg-yellow-100/90 px-2.5 py-1.5 text-center text-slate-950 shadow-md"
+      style={{
+        left: `${translation.x}%`,
+        top: `${translation.y}%`,
+        maxWidth: `${translation.maxWidth ?? 22}%`,
+        fontSize: `${translation.fontSize ?? 1}rem`,
+        transform: 'translate(-50%, -50%)',
+      }}
     >
-      <span className="text-black font-semibold">
-        {showEnglish ? translation.englishText : translation.tunicText || "Empty"}
-      </span>
-      <div className="text-[10px] text-gray-500 mt-1">(Double click to edit)</div>
+      <span className="block text-wrap break-words font-bold leading-tight">{translation.englishText}</span>
     </div>
   );
 }
