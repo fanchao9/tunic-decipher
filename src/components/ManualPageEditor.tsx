@@ -19,12 +19,12 @@ export default function ManualPageEditor({
 
   return (
     <section className="w-full">
-      <div className="mb-2 flex items-center justify-between text-sm text-slate-300">
+      {/* <div className="mb-2 flex items-center justify-between text-sm text-slate-300">
         <span className="font-semibold text-yellow-300">{pageTitle}</span>
-      </div>
+      </div> */}
       <div
         className="relative mx-auto overflow-hidden border border-slate-600 bg-slate-800 shadow-xl"
-        style={isMissing ? { maxWidth: 1150, aspectRatio: '1150 / 850', width: '100%' } : undefined}
+        style={{ maxWidth: 1150, aspectRatio: '1150 / 850', width: '100%' }}
       >
         {isMissing ? (
           <div className="flex h-full w-full items-center justify-center bg-slate-900 p-6 text-center">
@@ -39,9 +39,9 @@ export default function ManualPageEditor({
             <Image
               src={imageUrl}
               alt={pageTitle}
-              width={1920}
-              height={1080}
-              className="w-full h-auto block select-none pointer-events-none"
+              fill
+              sizes="(max-width: 1150px) 100vw, 1150px"
+              className="object-cover"
               draggable={false}
             />
             {translations.map((translation) => (
