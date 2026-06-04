@@ -136,7 +136,7 @@ export default function Home() {
         <header className="flex flex-col gap-4 border-b border-slate-700 px-4 py-5 md:flex-row md:items-end md:justify-between md:px-6">
           <div>
             <h1 className="text-3xl font-extrabold text-yellow-300 md:text-4xl">Tunic Translation Tome</h1>
-            <p className="mt-2 text-sm text-slate-300">Decipher runes, annotate manual pages, and test placeholder translations.</p>
+            <p className="mt-2 text-sm text-slate-300">Decipher runes, read the manual, and translate into Tunic.</p>
           </div>
 
           <nav className="flex flex-wrap gap-2">
