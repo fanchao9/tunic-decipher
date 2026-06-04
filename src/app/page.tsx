@@ -1,53 +1,13 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import ManualPageEditor from '../components/ManualPageEditor';
 import RuneGlyph, { placeholderRuneMap, RuneSegment } from '../components/RuneGlyph';
 import { ManualPage } from '../types';
+import { manualPages } from '../lib/manualPages';
 
-const manualPages: ManualPage[] = [
-  {
-    id: 'manual-1',
-    pageNumber: 1,
-    imageUrl: '/manual-pages/page-1.svg',
-    title: 'Manual Page 1',
-    translations: [
-      { id: 'p1-placeholder-1', x: 52, y: 18, englishText: 'Placeholder translation', maxWidth: 24 },
-      {
-        id: 'p1-placeholder-2',
-        x: 42,
-        y: 72,
-        englishText: 'Longer placeholder text wraps inside this box.',
-        maxWidth: 30,
-        fontSize: 0.85,
-      },
-    ],
-  },
-  {
-    id: 'manual-2',
-    pageNumber: 2,
-    imageUrl: '/manual-pages/page-2.svg',
-    title: 'Manual Page 2',
-    translations: [{ id: 'p2-placeholder-1', x: 50, y: 35, englishText: 'Page two text', maxWidth: 22 }],
-  },
-  {
-    id: 'manual-3',
-    pageNumber: 3,
-    imageUrl: '/manual-pages/page-3.svg',
-    title: 'Manual Page 3',
-    translations: [{ id: 'p3-placeholder-1', x: 56, y: 48, englishText: 'Hardcode each box here', maxWidth: 26 }],
-  },
-  {
-    id: 'manual-4',
-    pageNumber: 4,
-    imageUrl: '/manual-pages/page-4.svg',
-    title: 'Manual Page 4',
-    translations: [{ id: 'p4-placeholder-1', x: 48, y: 60, englishText: 'Manual translation', maxWidth: 24 }],
-  },
-];
-
-const placeholderAlphabet = ['A', 'B', 'C', 'D', 'E', 'F'];
+const placeholderAlphabet = ['uh', 'ee', 'oh', 'uu', 'ih', 'eh', 'ar', 'eye', 'ay', 'b', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p'];
 
 const placeholderLetterSegments: RuneSegment[] = [
   'outer-top-left',
@@ -67,14 +27,78 @@ const placeholderPhonemeMap: Record<string, RuneSegment[]> = {
   F: placeholderRuneMap.F,
 };
 
+const buildAllManualSpreads = (pages: ManualPage[]) => {
+  const pageMap = new Map(pages.map((page) => [page.pageNumber, page]));
+  const pageNumbers = Array.from(pageMap.keys()).sort((a, b) => a - b);
+  const spreads: ManualPage[][] = [];
+
+  if (!pageNumbers.length) return spreads;
+
+  const maxPageNumber = pageNumbers[pageNumbers.length - 1];
+
+  for (let pageNumber = 1; pageNumber <= maxPageNumber; pageNumber += 2) {
+    const spread: ManualPage[] = [];
+
+    if (pageMap.has(pageNumber)) {
+      spread.push(pageMap.get(pageNumber)!);
+    }
+
+    if (pageMap.has(pageNumber + 1)) {
+      spread.push(pageMap.get(pageNumber + 1)!);
+    }
+
+    if (spread.length > 0) {
+      spreads.push(spread);
+    }
+  }
+
+  return spreads;
+};
+
 type Tab = 'alphabet' | 'manual' | 'translator';
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<Tab>('manual');
   const [spreadIndex, setSpreadIndex] = useState(0);
   const [englishInput, setEnglishInput] = useState('The golden path');
+  const [collectedPageIds, setCollectedPageIds] = useState<Record<string, boolean>>(
+    () => Object.fromEntries(manualPages.map((page) => [page.id, true]))
+  );
 
-  const visiblePages = useMemo(() => manualPages.slice(spreadIndex, spreadIndex + 2), [spreadIndex]);
+  const allPageSpreads = useMemo(() => buildAllManualSpreads(manualPages), []);
+
+  const pageSpreads = allPageSpreads;
+
+  useEffect(() => {
+    setSpreadIndex((current) => (pageSpreads.length === 0 ? 0 : Math.min(current, pageSpreads.length - 1)));
+  }, [pageSpreads.length]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (activeTab !== 'manual') return;
+      const target = document.activeElement;
+      if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.getAttribute('contenteditable') === 'true')) {
+        return;
+      }
+
+      const key = event.key.toLowerCase();
+      if (key === 'a') {
+        event.preventDefault();
+        setSpreadIndex((current) => Math.max(0, current - 1));
+      } else if (key === 'd') {
+        event.preventDefault();
+        setSpreadIndex((current) => Math.min(pageSpreads.length - 1, current + 1));
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [activeTab, pageSpreads.length]);
+
+  const visiblePages = pageSpreads[spreadIndex] ?? [];
+  const visiblePageLabel = visiblePages.length
+    ? visiblePages.map((page) => page.pageNumber).join('/')
+    : 'No collected pages selected';
 
   const translatedRunes = englishInput
     .split('')
@@ -82,11 +106,11 @@ export default function Home() {
     .map((character) => (character === ' ' ? null : placeholderRuneMap[character.toUpperCase()] ?? placeholderLetterSegments));
 
   const goToPreviousSpread = () => {
-    setSpreadIndex((current) => Math.max(0, current - 2));
+    setSpreadIndex((current) => Math.max(0, current - 1));
   };
 
   const goToNextSpread = () => {
-    setSpreadIndex((current) => Math.min(manualPages.length - 2, current + 2));
+    setSpreadIndex((current) => Math.min(pageSpreads.length - 1, current + 1));
   };
 
   return (
@@ -115,14 +139,14 @@ export default function Home() {
 
         {activeTab === 'alphabet' && (
           <section className="grid gap-4 px-4 md:grid-cols-[260px_1fr] md:px-6">
-            <div className="rounded border border-slate-700 bg-slate-900 p-4">
+            <div className="rounded border border-slate-700 bg-slate-900 p-4 h-fit">
               <h2 className="text-xl font-bold text-yellow-300">Alphabet</h2>
               <p className="mt-2 text-sm text-slate-300">Placeholder segment maps until the full rune alphabet is filled in.</p>
             </div>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
               {placeholderAlphabet.map((letter) => (
                 <div key={letter} className="rounded border border-slate-700 bg-slate-800 p-4 text-center">
-                  <div className="text-sm font-bold text-slate-400">{letter}</div>
+                  <div className="text-m font-bold text-slate-400">{letter}</div>
                   <div className="mt-2">
                     <RuneGlyph segments={placeholderRuneMap[letter]} title={`${letter} rune placeholder`} />
                   </div>
@@ -134,6 +158,49 @@ export default function Home() {
 
         {activeTab === 'manual' && (
           <section className="flex flex-col gap-4">
+            <div className="rounded border border-slate-700 bg-slate-900 p-4">
+              <details className="group">
+                <summary className="flex cursor-pointer items-center justify-between gap-4 text-sm font-semibold text-yellow-300">
+                  <span>Table of contents</span>
+                  <span className="text-slate-300 transition-transform duration-150 group-open:-rotate-180">▾</span>
+                </summary>
+                <div className="mt-3 space-y-2 text-sm text-slate-200">
+                  {allPageSpreads.map((spread) => {
+                    const allSelected = spread.every((page) => collectedPageIds[page.id]);
+                    const label = spread.length === 1
+                      ? `Page ${spread[0].pageNumber}`
+                      : `Pages ${spread[0].pageNumber}/${spread[1].pageNumber}`;
+
+                    return (
+                      <label
+                        key={spread.map((page) => page.id).join('-')}
+                        className="flex items-center gap-3 rounded border border-slate-700 bg-slate-800 px-3 py-2"
+                      >
+                        <input
+                          type="checkbox"
+                          checked={allSelected}
+                          onChange={() =>
+                            setCollectedPageIds((current) => {
+                              const enabled = !allSelected;
+                              return spread.reduce(
+                                (acc, page) => ({
+                                  ...acc,
+                                  [page.id]: enabled,
+                                }),
+                                { ...current }
+                              );
+                            })
+                          }
+                          className="h-4 w-4 rounded border-slate-600 bg-slate-950 text-yellow-300 focus:ring-yellow-300"
+                        />
+                        <span>{label}</span>
+                      </label>
+                    );
+                  })}
+                </div>
+              </details>
+            </div>
+
             <div className="grid w-full gap-0 lg:grid-cols-2">
               {visiblePages.map((page) => (
                 <ManualPageEditor
@@ -141,6 +208,7 @@ export default function Home() {
                   imageUrl={page.imageUrl}
                   pageTitle={page.title}
                   translations={page.translations}
+                  isMissing={!collectedPageIds[page.id]}
                 />
               ))}
             </div>
@@ -148,7 +216,7 @@ export default function Home() {
             <div className="flex items-center justify-center gap-4 pb-6">
               <button
                 onClick={goToPreviousSpread}
-                disabled={spreadIndex === 0}
+                disabled={spreadIndex === 0 || pageSpreads.length === 0}
                 className="flex h-10 w-10 items-center justify-center rounded bg-slate-800 text-slate-100 disabled:cursor-not-allowed disabled:opacity-40 hover:enabled:bg-slate-700"
                 aria-label="Previous pages"
                 title="Previous pages"
@@ -156,11 +224,11 @@ export default function Home() {
                 <ChevronLeft />
               </button>
               <span className="text-sm text-slate-300">
-                Pages {visiblePages[0]?.pageNumber}-{visiblePages[visiblePages.length - 1]?.pageNumber}
+                {visiblePages.length ? `Pages ${visiblePageLabel}` : visiblePageLabel}
               </span>
               <button
                 onClick={goToNextSpread}
-                disabled={spreadIndex >= manualPages.length - 2}
+                disabled={spreadIndex >= pageSpreads.length - 1 || pageSpreads.length === 0}
                 className="flex h-10 w-10 items-center justify-center rounded bg-slate-800 text-slate-100 disabled:cursor-not-allowed disabled:opacity-40 hover:enabled:bg-slate-700"
                 aria-label="Next pages"
                 title="Next pages"
