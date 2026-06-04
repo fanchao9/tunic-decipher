@@ -55,51 +55,36 @@ const buildAllManualSpreads = (pages: ManualPage[]) => {
   return spreads;
 };
 
-const buildBookSpreads = (pages: ManualPage[]) => {
-  const pageMap = new Map(pages.map((page) => [page.pageNumber, page]));
-  const spreads: ManualPage[][] = [];
-
-  if (pageMap.has(1)) {
-    const spread: ManualPage[] = [pageMap.get(1)!];
-    if (pageMap.has(52)) {
-      spread.push(pageMap.get(52)!);
-    }
-    spreads.push(spread);
-  }
-
-  for (let pageNumber = 2; pageNumber <= 50; pageNumber += 2) {
-    const spread: ManualPage[] = [];
-
-    if (pageMap.has(pageNumber)) {
-      spread.push(pageMap.get(pageNumber)!);
-    }
-
-    if (pageMap.has(pageNumber + 1)) {
-      spread.push(pageMap.get(pageNumber + 1)!);
-    }
-
-    if (spread.length > 0) {
-      spreads.push(spread);
-    }
-  }
-
-  return spreads;
-};
 
 type Tab = 'alphabet' | 'manual' | 'translator';
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<Tab>('manual');
   const [spreadIndex, setSpreadIndex] = useState(0);
+  const [isTocOpen, setIsTocOpen] = useState(false);
   const [englishInput, setEnglishInput] = useState('The golden path');
   const [collectedPageIds, setCollectedPageIds] = useState<Record<string, boolean>>(
     () => Object.fromEntries(manualPages.map((page) => [page.id, true]))
   );
 
-  const allPageSpreads = useMemo(() => buildAllManualSpreads(manualPages), []);
-  const bookSpreads = useMemo(() => buildBookSpreads(manualPages), []);
+  const sortedManualPages = useMemo(
+    () => [...manualPages].sort((a, b) => a.pageNumber - b.pageNumber),
+    []
+  );
 
-  const pageSpreads = allPageSpreads;
+  const tocColumns = useMemo(
+    () => [sortedManualPages.slice(0, 18), sortedManualPages.slice(18, 36), sortedManualPages.slice(36)],
+    [sortedManualPages]
+  );
+
+  const pageSpreads = useMemo(() => buildAllManualSpreads(manualPages), []);
+
+  const togglePageSelection = (page: ManualPage) => {
+    setCollectedPageIds((current) => ({
+      ...current,
+      [page.id]: !current[page.id],
+    }));
+  };
 
   useEffect(() => {
     setSpreadIndex((current) => (pageSpreads.length === 0 ? 0 : Math.min(current, pageSpreads.length - 1)));
@@ -189,49 +174,64 @@ export default function Home() {
         )}
 
         {activeTab === 'manual' && (
-          <section className="flex flex-col gap-4">
-            <div className="rounded border border-slate-700 bg-slate-900 p-4">
-              <details className="group">
-                <summary className="flex cursor-pointer items-center justify-between gap-4 text-sm font-semibold text-yellow-300">
-                  <span>Table of contents</span>
-                  <span className="text-slate-300 transition-transform duration-150 group-open:-rotate-180">▾</span>
-                </summary>
-                <div className="mt-3 space-y-2 text-sm text-slate-200">
-                  {bookSpreads.map((spread, spreadIndex) => {
-                    const allSelected = spread.every((page) => collectedPageIds[page.id]);
-                    const label = spreadIndex === 0
-                      ? 'Pages 1/52'
-                      : `Pages ${2 * spreadIndex}/${2 * spreadIndex + 1}`;
+          <section className="flex flex-col items-center gap-4">
 
-                    return (
-                      <label
-                        key={spread.map((page) => page.id).join('-')}
-                        className="flex items-center gap-3 rounded border border-slate-700 bg-slate-800 px-3 py-2"
-                      >
-                        <input
-                          type="checkbox"
-                          checked={allSelected}
-                          onChange={() =>
-                            setCollectedPageIds((current) => {
-                              const enabled = !allSelected;
-                              return spread.reduce(
-                                (acc, page) => ({
-                                  ...acc,
-                                  [page.id]: enabled,
-                                }),
-                                { ...current }
-                              );
-                            })
-                          }
-                          className="h-4 w-4 rounded border-slate-600 bg-slate-950 text-yellow-300 focus:ring-yellow-300"
-                        />
-                        <span>{label}</span>
-                      </label>
-                    );
-                  })}
+              <button
+                type="button"
+                onClick={() => setIsTocOpen(true)}
+                className="inline-flex items-center justify-center w-50 rounded bg-yellow-400 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-yellow-300"
+              >
+                Table of Contents
+              </button>
+
+            {isTocOpen && (
+              <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/90 p-4">
+                <div className="w-full max-w-6xl overflow-hidden rounded-3xl border border-slate-700 bg-slate-900 shadow-2xl">
+                  <div className="flex flex-col gap-3 border-b border-slate-700 p-4 md:flex-row md:items-center md:justify-between">
+                    <div>
+                      <h2 className="text-xl font-bold text-yellow-300">Table of Contents</h2>
+                      <p className="mt-1 text-sm text-slate-300">Toggle visibility for each manual page. Two columns show 18 pages and the last column shows 16.</p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setIsTocOpen(false)}
+                      className="rounded bg-slate-800 px-4 py-2 text-sm font-semibold text-slate-100 transition hover:bg-slate-700"
+                    >
+                      Close
+                    </button>
+                  </div>
+                  <div className="grid gap-4 p-4 md:grid-cols-3">
+                    {tocColumns.map((column, columnIndex) => (
+                      <div key={columnIndex} className="space-y-2">
+                        {column.map((page) => (
+                          <label
+                            key={page.id}
+                            className="flex items-center gap-3 rounded border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-200"
+                          >
+                            <input
+                              type="checkbox"
+                              checked={!!collectedPageIds[page.id]}
+                              onChange={() => togglePageSelection(page)}
+                              className="h-4 w-4 rounded border-slate-600 bg-slate-950 text-yellow-300 focus:ring-yellow-300"
+                            />
+                            <span>Page {page.pageNumber}</span>
+                          </label>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                  <div className="flex justify-end border-t border-slate-700 p-4">
+                    <button
+                      type="button"
+                      onClick={() => setIsTocOpen(false)}
+                      className="rounded bg-yellow-400 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-yellow-300"
+                    >
+                      Done
+                    </button>
+                  </div>
                 </div>
-              </details>
-            </div>
+              </div>
+            )}
 
             <div className="grid w-full gap-0 lg:grid-cols-2">
               {visiblePages.map((page) => (
