@@ -55,6 +55,37 @@ const buildAllManualSpreads = (pages: ManualPage[]) => {
   return spreads;
 };
 
+const buildBookSpreads = (pages: ManualPage[]) => {
+  const pageMap = new Map(pages.map((page) => [page.pageNumber, page]));
+  const spreads: ManualPage[][] = [];
+
+  if (pageMap.has(1)) {
+    const spread: ManualPage[] = [pageMap.get(1)!];
+    if (pageMap.has(52)) {
+      spread.push(pageMap.get(52)!);
+    }
+    spreads.push(spread);
+  }
+
+  for (let pageNumber = 2; pageNumber <= 50; pageNumber += 2) {
+    const spread: ManualPage[] = [];
+
+    if (pageMap.has(pageNumber)) {
+      spread.push(pageMap.get(pageNumber)!);
+    }
+
+    if (pageMap.has(pageNumber + 1)) {
+      spread.push(pageMap.get(pageNumber + 1)!);
+    }
+
+    if (spread.length > 0) {
+      spreads.push(spread);
+    }
+  }
+
+  return spreads;
+};
+
 type Tab = 'alphabet' | 'manual' | 'translator';
 
 export default function Home() {
@@ -66,6 +97,7 @@ export default function Home() {
   );
 
   const allPageSpreads = useMemo(() => buildAllManualSpreads(manualPages), []);
+  const bookSpreads = useMemo(() => buildBookSpreads(manualPages), []);
 
   const pageSpreads = allPageSpreads;
 
@@ -165,11 +197,11 @@ export default function Home() {
                   <span className="text-slate-300 transition-transform duration-150 group-open:-rotate-180">▾</span>
                 </summary>
                 <div className="mt-3 space-y-2 text-sm text-slate-200">
-                  {allPageSpreads.map((spread) => {
+                  {bookSpreads.map((spread, spreadIndex) => {
                     const allSelected = spread.every((page) => collectedPageIds[page.id]);
-                    const label = spread.length === 1
-                      ? `Page ${spread[0].pageNumber}`
-                      : `Pages ${spread[0].pageNumber}/${spread[1].pageNumber}`;
+                    const label = spreadIndex === 0
+                      ? 'Pages 1/52'
+                      : `Pages ${2 * spreadIndex}/${2 * spreadIndex + 1}`;
 
                     return (
                       <label

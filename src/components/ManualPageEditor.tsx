@@ -22,9 +22,12 @@ export default function ManualPageEditor({
       <div className="mb-2 flex items-center justify-between text-sm text-slate-300">
         <span className="font-semibold text-yellow-300">{pageTitle}</span>
       </div>
-      <div className="relative w-full overflow-hidden border border-slate-600 bg-slate-800 shadow-xl">
+      <div
+        className="relative mx-auto overflow-hidden border border-slate-600 bg-slate-800 shadow-xl"
+        style={isMissing ? { maxWidth: 1150, aspectRatio: '1150 / 850', width: '100%' } : undefined}
+      >
         {isMissing ? (
-          <div className="flex h-full min-h-[605px] w-full items-center justify-center bg-slate-900 p-6 text-center">
+          <div className="flex h-full w-full items-center justify-center bg-slate-900 p-6 text-center">
             <div>
               <div className="text-xl font-bold uppercase tracking-wide text-yellow-300">
                 MISSING MANUAL PAGE {pageNumber}
