@@ -12,6 +12,7 @@ export type RuneSegment =
   | 'inner-bottom-left'
   | 'inner-bottom-right'
   | 'stem-top'
+  | 'stem-top-mini'
   | 'stem-bottom'
   | 'base-top-left'
   | 'base-top-right'
@@ -38,6 +39,7 @@ const defaultSegments: RuneSegment[] = [
   'inner-bottom-left',
   'inner-bottom-right',
   'stem-top',
+  'stem-top-mini',
   'stem-bottom',
   'base-top-left',
   'base-top-right',
@@ -57,6 +59,7 @@ const segmentLines: Partial<Record<RuneSegment, [number, number, number, number]
   'inner-bottom-left': [60, 98, 24, 125],
   'inner-bottom-right': [60, 98, 96, 125],
   'stem-top': [60, 82, 60, 21],
+  'stem-top-mini': [60, 82, 60, 70],
   'stem-bottom': [60, 98, 60, 159],
   'base-top-left': [20, 82, 60, 82],
   'base-top-right': [60, 82, 100, 82],
@@ -74,19 +77,23 @@ export const placeholderRuneMap: Record<string, RuneSegment[]> = {
   eye: ['outer-top-right'],
   ay: ['outer-top-left'],
   er: ['outer-top-right', 'outer-top-middle-left', 'outer-bottom-middle-left', 'outer-bottom-left', 'outer-bottom-right'],
+  air_ere: ['outer-top-middle-left', 'outer-bottom-middle-left', 'outer-bottom-right'],
+  aaa: ['outer-top-left', 'outer-top-right', 'outer-top-middle-left', 'outer-bottom-middle-left',],
+  test1: ['outer-top-middle-left', 'outer-top-right', 'outer-bottom-middle-left', 'outer-bottom-left', 'outer-bottom-right'],
+  test2: ['outer-top-middle-left', 'outer-bottom-middle-left', 'outer-bottom-left'],
   
   //consonants
   b: ['stem-top', 'inner-bottom-right'],
   d: ['stem-top', 'inner-bottom-left', 'inner-bottom-right'],
   f: ['stem-top', 'inner-top-right', 'inner-bottom-left'],
-  g: ['stem-top', 'inner-top-right', 'inner-bottom-right'],
+  g: ['inner-top-right', 'inner-bottom-right', 'stem-bottom', 'stem-top-mini'],
   h: ['stem-top', 'stem-bottom', 'inner-bottom-right'],
   j: ['stem-top', 'inner-bottom-left'],
   k: ['stem-top', 'inner-top-right', 'inner-bottom-right'],
   l: ['stem-top', 'stem-bottom'],
   m: ['inner-bottom-left', 'inner-bottom-right'],
   n: ['inner-top-left', 'inner-bottom-left', 'inner-bottom-right'],
-  p: ['stem-top', 'stem-bottom', 'inner-top-right'],
+  p: ['stem-top-mini', 'stem-bottom', 'inner-top-right'],
   r: ['stem-top', 'stem-bottom', 'inner-top-right'],
   s: ['stem-top', 'stem-bottom', 'inner-top-right', 'inner-bottom-left'],
   t: ['stem-top', 'stem-bottom', 'inner-top-left', 'inner-top-right'],

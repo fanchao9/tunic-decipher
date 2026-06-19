@@ -8,7 +8,7 @@ import RuneGlyph, { placeholderRuneMap, RuneSegment } from '../components/RuneGl
 import { ManualPage } from '../types';
 import { manualPages } from '../lib/manualPages';
 
-const placeholderAlphabet = ['uh', 'ee', 'oh', 'uu', 'ih', 'eh', 'ar', 'eye', 'ay', 'b', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'r', 's', 't', 'v', 'w', 'y', 'z', 'sh', 'th', 'test'];
+const placeholderAlphabet = ['uh', 'ee', 'oh', 'uu', 'ih', 'eh', 'ar', 'eye', 'ay', 'air_ere', 'aaa', 'b', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'r', 's', 't', 'v', 'w', 'y', 'z', 'sh', 'th', 'test1', 'test2', 'all'];
 
 const placeholderLetterSegments: RuneSegment[] = [
   'outer-top-left',
@@ -93,6 +93,13 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState<Tab>('manual');
   const [spreadIndex, setSpreadIndex] = useState(0);
   const [isTocOpen, setIsTocOpen] = useState(false);
+  const [showRunicTranslations, setShowRunicTranslations] = useState(() => {
+    try {
+      return localStorage.getItem('showRunicTranslations') !== 'false';
+    } catch (e) {
+      return true;
+    }
+  });
   const [englishInput, setEnglishInput] = useState('The golden path');
   const [collectedPageIds, setCollectedPageIds] = useState<Record<string, boolean>>(
     () => Object.fromEntries(manualPages.map((page) => [page.id, false]))
@@ -150,6 +157,14 @@ export default function Home() {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [activeTab, pageSpreads.length]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('showRunicTranslations', showRunicTranslations ? 'true' : 'false');
+    } catch (e) {
+      // ignore
+    }
+  }, [showRunicTranslations]);
 
   const visiblePages = pageSpreads[spreadIndex] ?? [];
   const visiblePageLabel = visiblePages.length
@@ -222,6 +237,15 @@ export default function Home() {
               >
                 Table of Contents
               </button>
+              <button
+                type="button"
+                onClick={() => setShowRunicTranslations((s) => !s)}
+                className={`inline-flex items-center justify-center w-50 rounded px-4 py-2 text-sm font-semibold transition ${
+                  showRunicTranslations ? 'bg-yellow-400 text-slate-950 hover:bg-yellow-300' : 'bg-slate-800 text-slate-200 hover:bg-slate-700'
+                }`}
+              >
+                Toggle Runic Translations
+              </button>
 
             <ManualPageToc
               isOpen={isTocOpen}
@@ -240,6 +264,7 @@ export default function Home() {
                   imageUrl={page.imageUrl}
                   pageTitle={page.title}
                   translations={page.translations}
+                  showTranslations={showRunicTranslations}
                   isMissing={!collectedPageIds[page.id]}
                 />
               ))}
