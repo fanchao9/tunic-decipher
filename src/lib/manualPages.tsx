@@ -4,7 +4,7 @@ export const manualPages: ManualPage[] = [
   {
     id: 'manual-1',
     pageNumber: 1,
-    imageUrl: '/manual-pages/placeholder.png',
+    imageUrl: '/manual-pages/page-1.svg',
     title: 'Manual Page 1',
     translations: [
       { id: 'p1-placeholder-1', x: 52, y: 18, englishText: 'Placeholder translation', maxWidth: 24 },
@@ -23,14 +23,19 @@ export const manualPages: ManualPage[] = [
     pageNumber: 2,
     imageUrl: '/manual-pages/manual-2.png',
     title: 'Manual Page 2',
-    translations: [{ id: 'p2-placeholder-1', x: 50, y: 35, englishText: 'Page two text', maxWidth: 22 }],
+    translations: [
+      { id: 'p2-placeholder-1', x: 30, y: 58, englishText: 'Cards', maxWidth: 22 },
+      { id: 'p2-card2', x: 30, y: 64, englishText: 'wasd', maxWidth: 22 },
+      { id: 'p2-card3', x: 67, y: 65, englishText: 'wasd', maxWidth: 22 },
+    ],
   },
   {
     id: 'manual-3',
     pageNumber: 3,
     imageUrl: '/manual-pages/manual-3.png',
     title: 'Manual Page 3',
-    translations: [{ id: 'p3-placeholder-1', x: 56, y: 48, englishText: 'Hardcode each box here', maxWidth: 26 }],
+    translations: [
+      { id: 'p3-placeholder-1', x: 30, y: 18, englishText: 'There lived a Civilization of gpayt ___ . They built a city, and within* that city they built a palace. They held sacred the secrets of the Holy Cross, and ad_st_d the plain__', maxWidth: 40}],
   },
   {
     id: 'manual-4',
