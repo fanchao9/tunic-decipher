@@ -7,6 +7,7 @@ interface ManualPageEditorProps {
   pageTitle: string;
   translations?: Translation[];
   isMissing?: boolean;
+  showTranslations?: boolean;
 }
 
 export default function ManualPageEditor({
@@ -14,6 +15,7 @@ export default function ManualPageEditor({
   pageTitle,
   translations = [],
   isMissing = false,
+  showTranslations = true,
 }: ManualPageEditorProps) {
   const pageNumber = pageTitle.replace('Manual Page ', '');
 
@@ -44,9 +46,10 @@ export default function ManualPageEditor({
               className="object-cover"
               draggable={false}
             />
-            {translations.map((translation) => (
-              <TranslationBox key={translation.id} translation={translation} />
-            ))}
+            {showTranslations &&
+              translations.map((translation) => (
+                <TranslationBox key={translation.id} translation={translation} />
+              ))}
           </>
         )}
       </div>
