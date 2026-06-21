@@ -101,8 +101,10 @@ export const placeholderRuneMap: Record<string, RuneSegment[]> = {
   w: ['inner-top-left', 'inner-top-right'],
   y: ['stem-top', 'stem-bottom', 'inner-top-left'],
   z: ['stem-top', 'stem-bottom', 'inner-top-left', 'inner-bottom-right'],
-  sh: ['stem-top', 'stem-bottom', 'inner-top-left', 'inner-top-right', 'inner-bottom-left', 'inner-bottom-right'],
+  sh: ['stem-top-mini', 'stem-bottom', 'inner-top-left', 'inner-top-right', 'inner-bottom-left', 'inner-bottom-right'],
   th: ['stem-top', 'stem-bottom', 'inner-bottom-left', 'inner-bottom-right'],
+  th_also: ['stem-top', 'stem-bottom', 'inner-top-left', 'inner-top-right'],
+  ng: ['stem-top','stem-bottom', 'inner-top-left', 'inner-top-right', 'inner-bottom-left', 'inner-bottom-right'],
 
 };
 
