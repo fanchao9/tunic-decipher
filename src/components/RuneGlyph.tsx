@@ -65,7 +65,7 @@ const segmentLines: Partial<Record<RuneSegment, [number, number, number, number]
   'base-top-right': [60, 82, 100, 82],
 };
 
-export const placeholderRuneMap: Record<string, RuneSegment[]> = {
+export const RuneMap: Record<string, RuneSegment[]> = {
   //vowels
   uh: ['outer-top-left', 'outer-top-right'],
   ee: ['outer-top-left', 'outer-top-middle-left', 'outer-bottom-middle-left', 'outer-bottom-left', 'outer-bottom-right'],
@@ -79,8 +79,6 @@ export const placeholderRuneMap: Record<string, RuneSegment[]> = {
   er: ['outer-top-right', 'outer-top-middle-left', 'outer-bottom-middle-left', 'outer-bottom-left', 'outer-bottom-right'],
   air: ['outer-top-middle-left', 'outer-bottom-middle-left', 'outer-bottom-right'],
   aaa: ['outer-top-left', 'outer-top-right', 'outer-top-middle-left', 'outer-bottom-middle-left',],
-  test2: ['outer-bottom-left'],
-  test1: ['outer-top-left', 'outer-top-middle-left', 'outer-bottom-middle-left', 'outer-bottom-right'],
   ear: ['outer-top-left', 'outer-top-middle-left', 'outer-bottom-middle-left', 'outer-bottom-right'],
   oy: ['outer-bottom-left'],
   ow: ['outer-bottom-right'],

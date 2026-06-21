@@ -4,11 +4,11 @@ import { useEffect, useMemo, useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import ManualPageEditor from '../components/ManualPageEditor';
 import ManualPageToc from '../components/ManualPageToc';
-import RuneGlyph, { placeholderRuneMap, RuneSegment } from '../components/RuneGlyph';
+import RuneGlyph, { RuneMap, RuneSegment } from '../components/RuneGlyph';
 import { ManualPage } from '../types';
 import { manualPages } from '../lib/manualPages';
 
-const placeholderAlphabet = ['uh', 'ee', 'oh', 'uu', 'ih', 'eh', 'ar', 'eye', 'ay', 'ow', 'air', 'oo', 'aaa', 'aw', 'er', 'or', 'ear', 'oy', 'b', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'r', 's', 't', 'v', 'w', 'y', 'z', 'sh', 'th', 'th_also', 'ng', 'ch', 'test1', 'test2', 'all'];
+const placeholderAlphabet = ['eye', 'ay', 'oy', 'ow', 'uh', 'ih', 'aw', 'oo', 'air', 'ar', 'aaa', 'eh', 'ear', 'ee', 'uu',  'er', 'or', 'oh', 'l', 'b', 'j', 'm', 'w', 'p', 'ch', 'k', 'v', 'n', 'd', 'h', 'r', 'y', 't', 'th', 'th_also', 'f', 'g', 's', 'z', 'sh', 'ng', 'test1', 'test2', 'all'];
 
 const placeholderDisplayNames: Record<string, string> = {
   uu: 'uu (blue)',
@@ -39,11 +39,11 @@ const placeholderLetterSegments: RuneSegment[] = [
 ];
 
 const placeholderPhonemeMap: Record<string, RuneSegment[]> = {
-  AH: placeholderRuneMap.A,
-  B: placeholderRuneMap.B,
-  D: placeholderRuneMap.D,
-  EH: placeholderRuneMap.E,
-  F: placeholderRuneMap.F,
+  AH: RuneMap.A,
+  B: RuneMap.B,
+  D: RuneMap.D,
+  EH: RuneMap.E,
+  F: RuneMap.F,
 };
 
 const buildAllManualSpreads = (pages: ManualPage[]) => {
@@ -192,7 +192,7 @@ export default function Home() {
   const translatedRunes = englishInput
     .split('')
     .filter((character) => /[a-z\s]/i.test(character))
-    .map((character) => (character === ' ' ? null : placeholderRuneMap[character.toUpperCase()] ?? placeholderLetterSegments));
+    .map((character) => (character === ' ' ? null : RuneMap[character.toUpperCase()] ?? placeholderLetterSegments));
 
   const goToPreviousSpread = () => {
     setSpreadIndex((current) => Math.max(0, current - 1));
@@ -237,7 +237,7 @@ export default function Home() {
                 <div key={letter} className="rounded border border-slate-700 bg-slate-800 p-4 text-center">
                   <div className="text-m font-bold text-slate-400">{placeholderDisplayNames[letter] ?? letter}</div>
                   <div className="mt-2">
-                    <RuneGlyph segments={placeholderRuneMap[letter]} title={`${placeholderDisplayNames[letter] ?? letter} rune placeholder`} />
+                    <RuneGlyph segments={RuneMap[letter]} title={`${placeholderDisplayNames[letter] ?? letter} rune placeholder`} />
                   </div>
                 </div>
               ))}
