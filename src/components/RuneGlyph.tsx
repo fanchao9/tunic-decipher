@@ -86,7 +86,7 @@ export const placeholderRuneMap: Record<string, RuneSegment[]> = {
   ow: ['outer-bottom-right'],
   oo: ['outer-top-middle-left', 'outer-bottom-middle-left', 'outer-bottom-left'],
   aw: ['outer-top-left', 'outer-top-middle-left', 'outer-bottom-middle-left'],
-  or: ['outer-top-right', 'outer-top-left', 'outer-top-middle-left', 'outer-bottom-right'],
+  or: ['outer-top-right', 'outer-top-left', 'outer-top-middle-left', 'outer-bottom-right', 'outer-bottom-middle-left'],
   
   //consonants
   b: ['stem-top', 'inner-bottom-right'],
