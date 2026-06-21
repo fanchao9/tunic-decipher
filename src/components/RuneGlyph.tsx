@@ -79,12 +79,14 @@ export const placeholderRuneMap: Record<string, RuneSegment[]> = {
   er: ['outer-top-right', 'outer-top-middle-left', 'outer-bottom-middle-left', 'outer-bottom-left', 'outer-bottom-right'],
   air: ['outer-top-middle-left', 'outer-bottom-middle-left', 'outer-bottom-right'],
   aaa: ['outer-top-left', 'outer-top-right', 'outer-top-middle-left', 'outer-bottom-middle-left',],
-  //test1: ['outer-top-middle-left', 'outer-top-right', 'outer-bottom-middle-left', 'outer-bottom-left', 'outer-bottom-right'],
-  //test2: ['outer-top-left', 'outer-top-right', 'outer-top-middle-left', 'outer-bottom-middle-left', 'outer-bottom-left'],
+  test2: ['outer-bottom-left'],
+  test1: ['outer-top-left', 'outer-top-middle-left', 'outer-bottom-middle-left', 'outer-bottom-right'],
+  ear: ['outer-top-left', 'outer-top-middle-left', 'outer-bottom-middle-left', 'outer-bottom-right'],
+  oy: ['outer-bottom-left'],
   ow: ['outer-bottom-right'],
   oo: ['outer-top-middle-left', 'outer-bottom-middle-left', 'outer-bottom-left'],
   aw: ['outer-top-left', 'outer-top-middle-left', 'outer-bottom-middle-left'],
-  or: ['outer-top-right', 'outer-top-left', 'outer-top-middle-right', 'outer-top-middle-left', 'outer-bottom-right'],
+  or: ['outer-top-right', 'outer-top-left', 'outer-top-middle-left', 'outer-bottom-right'],
   
   //consonants
   b: ['stem-top', 'inner-bottom-right'],

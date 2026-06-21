@@ -8,7 +8,7 @@ import RuneGlyph, { placeholderRuneMap, RuneSegment } from '../components/RuneGl
 import { ManualPage } from '../types';
 import { manualPages } from '../lib/manualPages';
 
-const placeholderAlphabet = ['uh', 'ee', 'oh', 'uu', 'ih', 'eh', 'ar', 'eye', 'ay', 'ow', 'air', 'oo', 'aaa', 'aw', 'er', 'or', 'b', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'r', 's', 't', 'v', 'w', 'y', 'z', 'sh', 'th', 'th_also', 'ng', 'ch', 'test1', 'test2', 'all'];
+const placeholderAlphabet = ['uh', 'ee', 'oh', 'uu', 'ih', 'eh', 'ar', 'eye', 'ay', 'ow', 'air', 'oo', 'aaa', 'aw', 'er', 'or', 'ear', 'oy', 'b', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'r', 's', 't', 'v', 'w', 'y', 'z', 'sh', 'th', 'th_also', 'ng', 'ch', 'test1', 'test2', 'all'];
 
 const placeholderDisplayNames: Record<string, string> = {
   uu: 'uu (blue)',
@@ -24,6 +24,8 @@ const placeholderDisplayNames: Record<string, string> = {
   aw: 'aw (law)',
   er: 'er (her)',
   or: 'or (door)',
+  ear: 'ear (hear)',
+  oy: 'oy (boy)',
 };
 
 const placeholderLetterSegments: RuneSegment[] = [
