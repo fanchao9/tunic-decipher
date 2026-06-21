@@ -8,7 +8,23 @@ import RuneGlyph, { placeholderRuneMap, RuneSegment } from '../components/RuneGl
 import { ManualPage } from '../types';
 import { manualPages } from '../lib/manualPages';
 
-const placeholderAlphabet = ['uh', 'ee', 'oh', 'uu', 'ih', 'eh', 'ar', 'eye', 'ay', 'air_ere', 'aaa', 'b', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'r', 's', 't', 'v', 'w', 'y', 'z', 'sh', 'th', 'th_also', 'ng', 'test1', 'test2', 'all'];
+const placeholderAlphabet = ['uh', 'ee', 'oh', 'uu', 'ih', 'eh', 'ar', 'eye', 'ay', 'ow', 'air', 'oo', 'aaa', 'aw', 'er', 'or', 'b', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'r', 's', 't', 'v', 'w', 'y', 'z', 'sh', 'th', 'th_also', 'ng', 'ch', 'test1', 'test2', 'all'];
+
+const placeholderDisplayNames: Record<string, string> = {
+  uu: 'uu (blue)',
+  ih: 'ih (sit)',
+  eh: 'eh (bed)',
+  ar: 'ar (car)',
+  eye: 'eye (fly)',
+  ay: 'ay (day)',
+  ow: 'ow (now)',
+  air: "air (there)",
+  oo: 'oo (should)',
+  aaa: 'aaa (bad)',
+  aw: 'aw (law)',
+  er: 'er (her)',
+  or: 'or (door)',
+};
 
 const placeholderLetterSegments: RuneSegment[] = [
   'outer-top-left',
@@ -217,9 +233,9 @@ export default function Home() {
               </div>
               {placeholderAlphabet.map((letter) => (
                 <div key={letter} className="rounded border border-slate-700 bg-slate-800 p-4 text-center">
-                  <div className="text-m font-bold text-slate-400">{letter}</div>
+                  <div className="text-m font-bold text-slate-400">{placeholderDisplayNames[letter] ?? letter}</div>
                   <div className="mt-2">
-                    <RuneGlyph segments={placeholderRuneMap[letter]} title={`${letter} rune placeholder`} />
+                    <RuneGlyph segments={placeholderRuneMap[letter]} title={`${placeholderDisplayNames[letter] ?? letter} rune placeholder`} />
                   </div>
                 </div>
               ))}
