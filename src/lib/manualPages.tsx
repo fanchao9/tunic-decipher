@@ -25,8 +25,8 @@ export const manualPages: ManualPage[] = [
     title: 'Manual Page 2',
     translations: [
       { id: 'p2-placeholder-1', x: 30, y: 58, englishText: 'Cards', maxWidth: 22 },
-      { id: 'p2-card2', x: 30, y: 64, englishText: 'wasd', maxWidth: 22 },
-      { id: 'p2-card3', x: 67, y: 65, englishText: 'wasd', maxWidth: 22 },
+      { id: 'p2-card2', x: 30, y: 64, englishText: 'Praying', maxWidth: 22 },
+      { id: 'p2-card3', x: 70, y: 65, englishText: 'The Far Shore', maxWidth: 22 },
     ],
   },
   {
@@ -149,13 +149,13 @@ export const manualPages: ManualPage[] = [
   {
     id: 'manual-22',
     pageNumber: 22,
-    imageUrl: '/manual-pages/placeholder.png',
+    imageUrl: '/manual-pages/placeholder.svg',
     title: 'Manual Page 22',
   },
   {
     id: 'manual-23',
     pageNumber: 23,
-    imageUrl: '/manual-pages/placeholder.png',
+    imageUrl: '/manual-pages/placeholder.svg',
     title: 'Manual Page 23',
   },
   {
@@ -330,5 +330,29 @@ export const manualPages: ManualPage[] = [
     pageNumber: 52,
     imageUrl: '/manual-pages/manual-52.png',
     title: 'Manual Page 52',
+  },
+  {
+    id: 'manual-53',
+    pageNumber: 53,
+    imageUrl: '/manual-pages/placeholder.svg',
+    title: 'Manual Page 53',
+  },
+  {
+    id: 'manual-54',
+    pageNumber: 54,
+    imageUrl: '/manual-pages/placeholder.svg',
+    title: 'Manual Page 54',
+  },
+  {
+    id: 'manual-55',
+    pageNumber: 55,
+    imageUrl: '/manual-pages/placeholder.svg',
+    title: 'Manual Page 55',
+  },
+  {
+    id: 'manual-56',
+    pageNumber: 56,
+    imageUrl: '/manual-pages/placeholder.svg',
+    title: 'Manual Page 56',
   },
 ];
