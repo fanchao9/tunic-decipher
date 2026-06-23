@@ -47,6 +47,8 @@ const placeholderPhonemeMap: Record<string, RuneSegment[]> = {
 };
 
 const buildAllManualSpreads = (pages: ManualPage[]) => {
+  // Build spreads for display: show page 1 alone, then two-page spreads,
+  // and finally the last page alone if it exists (e.g. 56).
   const pageMap = new Map(pages.map((page) => [page.pageNumber, page]));
   const pageNumbers = Array.from(pageMap.keys()).sort((a, b) => a - b);
   const spreads: ManualPage[][] = [];
@@ -55,51 +57,42 @@ const buildAllManualSpreads = (pages: ManualPage[]) => {
 
   const maxPageNumber = pageNumbers[pageNumbers.length - 1];
 
-  for (let pageNumber = 1; pageNumber <= maxPageNumber; pageNumber += 2) {
+  // First page solo (if present)
+  if (pageMap.has(1)) {
+    spreads.push([pageMap.get(1)!]);
+  }
+
+  // Middle two-page spreads starting at 2 up to max-1
+  for (let p = 2; p < maxPageNumber; p += 2) {
     const spread: ManualPage[] = [];
+    if (pageMap.has(p)) spread.push(pageMap.get(p)!);
+    if (pageMap.has(p + 1)) spread.push(pageMap.get(p + 1)!);
+    if (spread.length) spreads.push(spread);
+  }
 
-    if (pageMap.has(pageNumber)) {
-      spread.push(pageMap.get(pageNumber)!);
-    }
-
-    if (pageMap.has(pageNumber + 1)) {
-      spread.push(pageMap.get(pageNumber + 1)!);
-    }
-
-    if (spread.length > 0) {
-      spreads.push(spread);
-    }
+  // Last page solo (if it's not the first page and it exists)
+  if (maxPageNumber !== 1 && pageMap.has(maxPageNumber)) {
+    spreads.push([pageMap.get(maxPageNumber)!]);
   }
 
   return spreads;
 };
 
 const buildBookSpreads = (pages: ManualPage[]) => {
+  // Build TOC spreads as numeric pairs: 1/2, 3/4, ... up to max (e.g. 55/56).
   const pageMap = new Map(pages.map((page) => [page.pageNumber, page]));
+  const pageNumbers = Array.from(pageMap.keys()).sort((a, b) => a - b);
   const spreads: ManualPage[][] = [];
 
-  if (pageMap.has(1)) {
-    const spread: ManualPage[] = [pageMap.get(1)!];
-    if (pageMap.has(52)) {
-      spread.push(pageMap.get(52)!);
-    }
-    spreads.push(spread);
-  }
+  if (!pageNumbers.length) return spreads;
 
-  for (let pageNumber = 2; pageNumber <= 50; pageNumber += 2) {
+  const maxPageNumber = pageNumbers[pageNumbers.length - 1];
+
+  for (let p = 1; p <= maxPageNumber; p += 2) {
     const spread: ManualPage[] = [];
-
-    if (pageMap.has(pageNumber)) {
-      spread.push(pageMap.get(pageNumber)!);
-    }
-
-    if (pageMap.has(pageNumber + 1)) {
-      spread.push(pageMap.get(pageNumber + 1)!);
-    }
-
-    if (spread.length > 0) {
-      spreads.push(spread);
-    }
+    if (pageMap.has(p)) spread.push(pageMap.get(p)!);
+    if (pageMap.has(p + 1)) spread.push(pageMap.get(p + 1)!);
+    if (spread.length) spreads.push(spread);
   }
 
   return spreads;
@@ -248,6 +241,7 @@ export default function Home() {
         {activeTab === 'manual' && (
           <section className="flex flex-col items-center gap-4">
 
+<div className="flex items-center gap-2">
               <button
                 type="button"
                 onClick={() => setIsTocOpen(true)}
@@ -264,6 +258,7 @@ export default function Home() {
               >
                 Toggle Runic Translations
               </button>
+            </div>
 
             <ManualPageToc
               isOpen={isTocOpen}
@@ -275,7 +270,7 @@ export default function Home() {
               onClose={() => setIsTocOpen(false)}
             />
 
-            <div className="grid w-full gap-0 lg:grid-cols-2">
+            <div className={`grid w-full gap-0 ${visiblePages.length > 1 ? 'lg:grid-cols-2' : 'place-items-center'}`}>
               {visiblePages.map((page) => (
                 <ManualPageEditor
                   key={page.id}
